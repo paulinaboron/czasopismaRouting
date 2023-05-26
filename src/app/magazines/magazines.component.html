@@ -1,0 +1,6 @@
+<div id="magContainer">
+    <div *ngFor="let source of imgSrc">
+        <img src="http://atarionline.pl/biblioteka/czasopisma/img/{{source[1]}}" alt="grafika" (click)="onMagazineClick(source[0])"/>
+    </div>
+</div>
+

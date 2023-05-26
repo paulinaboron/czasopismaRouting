@@ -1,0 +1,32 @@
+<p>years works!</p>
+{{ selectedMag }}
+
+<div id="btnsContainer">
+  <div *ngFor="let y of years">
+    <button (click)="clickYear(y)">{{ y }}</button>
+  </div>
+  <br />
+  <button (click)="goBack()">Cofnij</button>
+</div>
+
+<table *ngFor="let obj of array">
+    <tr>
+        <td><img src="http://atarionline.pl/biblioteka/czasopisma/{{selectedMag}}/{{obj[1].miniaturka}}"></td>
+        <td>
+            <p>format: {{obj[1].format}}</p>
+            <p>stron: {{obj[1].stron}}</p>
+            <p>plik: {{obj[1].plik}}</p>
+        </td>
+        <td>
+            <p>nazwa: {{obj[1].nazwa}}</p>
+            <p>numer: {{obj[1].numer}}</p>
+            <p>wydawca: {{obj[1].wydawca}}</p>
+        </td>
+
+        <td>
+            <p>skan: {{obj[1].skan}}</p>
+            <p>przetworzenie: {{obj[1].przetworzenie}}</p>
+            <p>podesłał: {{obj[1].podeslal}}</p>
+        </td>
+    </tr>
+</table>

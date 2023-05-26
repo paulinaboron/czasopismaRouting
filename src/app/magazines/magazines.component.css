@@ -1,0 +1,9 @@
+#magContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: min-content;
+}
+
+#magContainer img{
+    padding: 20px;
+}
