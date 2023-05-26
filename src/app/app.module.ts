@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { MagazinesComponent } from './magazines/magazines.component';
 import { YearsComponent } from './years/years.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,9 @@ import { YearsComponent } from './years/years.component';
     YearsComponent,
   ],
   imports: [
-    [BrowserModule, FormsModule]
+    [BrowserModule, FormsModule
+    AppRoutingModule
+  ]
   ],
   providers: [],
   bootstrap: [AppComponent]
