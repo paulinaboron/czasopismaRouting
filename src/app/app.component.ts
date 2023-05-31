@@ -1,53 +1,40 @@
 import { Component, Input } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent{
+export class AppComponent {
   title = 'czasopisma';
   time = new Date();
-  showMagazines = true  //zmienic na false
-  showYears = false
-  showTable = false
+  xml: any[] = []
 
-  selectedMag: string = '';
-  selectedYear: string = '';
-
-  constructor(){
+  constructor(private httpClient: HttpClient) {
     this.timer()
+    // this.getData()
+  }
+  
+
+  //todo cors nie działa
+  getData() {
+    this.httpClient.get<any[]>("https://mendela.pl/ap_web/czasopisma.xml")
+      .subscribe(data => {
+        this.xml = data;
+        console.log(data);
+        
+      },
+        error => {
+          console.log("error");
+        }
+      );
   }
 
-  timer(){
-    setInterval(() =>{
+  timer() {
+    setInterval(() => {
       this.time = new Date();
-       }, 1000);
-  }
-
-  onPassCreated(eventData: { password: string }) {
-    this.showMagazines = eventData.password == "123";
-  }
-
-  onMagazineSelected(eventData: {name: string}){
-    this.showYears = true;
-    this.showMagazines = false
-
-    this.selectedMag = eventData.name
-  }
-
-  goBack(eventData: {}) {
-    console.log("backkkkk");
-    
-    this.showMagazines = true;
-    this.showYears = false;
-  }
-
-  selectYear(eventData: {year: string}){
-    console.log(eventData.year + " apppp");
-
-    this.showTable = true;
-    
+    }, 1000);
   }
 
 }

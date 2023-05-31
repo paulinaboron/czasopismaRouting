@@ -1,12 +1,12 @@
-<p>years works!</p>
-{{ selectedMag }}
+<h2>{{ selectedMag }}</h2>
 
 <div id="btnsContainer">
   <div *ngFor="let y of years">
-    <button (click)="clickYear(y)">{{ y }}</button>
+   
+    <button> <a routerLink="/{{selectedMag}}/{{y}}">{{y}}</a></button>
   </div>
   <br />
-  <button (click)="goBack()">Cofnij</button>
+  <button><a routerLink="/">Cofnij</a></button>
 </div>
 
 <table *ngFor="let obj of array">

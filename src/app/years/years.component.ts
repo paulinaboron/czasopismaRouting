@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as xml2js from 'xml2js';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-years',
@@ -8,19 +9,28 @@ import * as xml2js from 'xml2js';
 })
 export class YearsComponent implements OnInit {
 
-  @Input() selectedMag = '';
+  selectedMag: string = "";
   years: string[] = [];
-
-  @Output()
-  goingBack = new EventEmitter<string>();
-
-  @Output()
-  yearSelected = new EventEmitter<{ year: string }>();
-  selectedYear = "";
+  selectedYear: string | null | undefined;
   data: any;
   array: any[] = [];
 
-  ngOnInit(): void {
+  constructor(private route: ActivatedRoute) {
+
+  }
+
+  async ngOnInit(): Promise<void> {
+
+    this.route.paramMap.subscribe(params => {  // dotyczy też queryParamMap
+      console.log("params: ", params.get("mag"), params.get("year"))
+      this.selectedMag = params.get("mag")!
+      this.selectedYear = params.get("year")
+      if(this.data) this.displayContent()
+    })
+    await this.fetchData()
+  }
+
+  async fetchData(): Promise<void> {
     fetch('./assets/czasopisma.xml')
       .then((response) => response.text())
       .then((data) => {
@@ -28,37 +38,29 @@ export class YearsComponent implements OnInit {
         const parser = new xml2js.Parser({ explicitArray: false });
         parser.parseString(data, (err, result) => {
           this.data = result.czasopisma
-          console.log(result.czasopisma.lata[this.selectedMag]);
-
           this.years = result.czasopisma.lata[this.selectedMag].split(',')
-          console.log(this.years);
-          
-
+          this.displayContent()
         });
       })
       .catch(console.error);
   }
 
-  goBack(){
-    this.goingBack.emit('back');
+  displayContent(): void {
+    console.log("displayyyyyy");
+    
+
+    if (this.selectedYear) {
+      Object.keys(this.data[this.selectedMag]).forEach(key => {
+        let obj = [key, this.data[this.selectedMag][key]]
+        this.array.push(obj)
+      });
+
+      let temp: any[] = [];
+      this.array.forEach(e => {
+        if (e[1].$.rok == this.selectedYear)
+          temp.push(e)
+      })
+      this.array = temp
+    }
   }
-
-  clickYear(y: string){
-    this.yearSelected.emit({year: y});
-    console.log(this.data[this.selectedMag]);
-    Object.keys(this.data[this.selectedMag]).forEach(key => {
-      let obj = [key, this.data[this.selectedMag][key]]
-      this.array.push(obj)
-    });
-
-    let temp: any[] = [];
-    this.array.forEach(e =>{
-      if(e[1].$.rok == y)
-      temp.push(e)
-    })
-    this.array = temp
-
-    console.log(this.array);
-  }
-
 }

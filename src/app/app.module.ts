@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { MagazinesComponent } from './magazines/magazines.component';
 import { YearsComponent } from './years/years.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,9 +15,11 @@ import { AppRoutingModule } from './app-routing.module';
     YearsComponent,
   ],
   imports: [
-    [BrowserModule, FormsModule
-    AppRoutingModule
-  ]
+    [BrowserModule,
+      FormsModule,
+      AppRoutingModule,
+      HttpClientModule
+    ]
   ],
   providers: [],
   bootstrap: [AppComponent]

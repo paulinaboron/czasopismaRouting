@@ -1,5 +1,3 @@
 <p>{{time | date:'d/M/y h:mm:ss'}}</p>
 
-<div *ngIf="showMagazines"><app-magazines (magazineSelected)="onMagazineSelected($event)"></app-magazines></div>
-
-<div *ngIf="showYears"><app-years [selectedMag]="selectedMag" (goingBack)="goBack($event)" (yearSelected)="selectYear($event)"></app-years></div>
+<router-outlet></router-outlet>

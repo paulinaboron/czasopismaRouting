@@ -8,7 +8,6 @@ import * as xml2js from 'xml2js';
 })
 export class MagazinesComponent implements OnInit {
   imgSrc: string[][] = [];
-  @Output() magazineSelected = new EventEmitter<{ name: string }>();
   
   constructor() {}
 
@@ -34,8 +33,4 @@ export class MagazinesComponent implements OnInit {
       .catch(console.error);
   }
 
-  onMagazineClick(mgz: string): void {
-    console.log(mgz);
-    this.magazineSelected.emit({ name: mgz });
-  }
 }

@@ -1,22 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {RouterModule, Routes} from '@angular/router'
-import { AppComponent } from './app.component';
-const routes: Routes = [
-  // {path: 'dwor', component: DworComponent},
-  // {path: 'bacowka/:id', component: BacowkaComponent}, //parametr
-  // {path: 'bacowka', component: BacowkaComponent},
-  // {path: '', redirectTo:"/bacowka", pathMatch: "full"}, //przekierowanie
-  {path: '**', component: AppComponent} //wildcard
-];
-imports: [RouterModule.forRoot(routes), CommonModule]
-exports: [RouterModule]
+import { RouterModule, Routes } from '@angular/router';
+import { MagazinesComponent } from './magazines/magazines.component';
+import { YearsComponent } from './years/years.component';
 
+const routes: Routes = [
+  { path: '', component: MagazinesComponent },
+  { path: ':mag', component: YearsComponent },
+  { path: ':mag/:year', component: YearsComponent },
+];
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
