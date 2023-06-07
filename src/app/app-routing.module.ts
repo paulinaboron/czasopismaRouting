@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: '', component: MagazinesComponent },
   { path: ':mag', component: YearsComponent },
   { path: ':mag/:year', component: YearsComponent },
+  {path: '**', redirectTo: "", pathMatch: "full"}
 ];
 
 @NgModule({
